@@ -31,7 +31,9 @@ class ListPermissions extends ListRecords
                             'delete' => 'Delete',
                             'export' => 'Export',
                             'import' => 'Import',
-                        ])->columns(5)
+                        ])
+                        ->columns(5)
+                        ->default(['view', 'list', 'create', 'edit', 'delete'])
                         ->required(),
                 ])
                 ->action(function (array $data) {
