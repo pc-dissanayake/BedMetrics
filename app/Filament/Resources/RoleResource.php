@@ -19,6 +19,8 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-user-tag';
 
+    
+
     public static function form(Form $form): Form
     {
         return $form
