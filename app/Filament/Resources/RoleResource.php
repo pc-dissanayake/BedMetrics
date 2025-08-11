@@ -51,11 +51,11 @@ class RoleResource extends Resource
                                     $modelPanel = explode('-', $rest);
                                     $model = isset($modelPanel[0]) ? str_replace('_', ' ', ucfirst($modelPanel[0])) : '';
                                     $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
-                                    $label = $action;
+                                    $label = '<span>' . $action . '</span>';
                                     if ($model || $panel) {
-                                        $label .= ' : ' . trim($model);
+                                        $label .= ' : <span class="text-blue-600">' . trim($model) . '</span>';
                                         if ($panel) {
-                                            $label .= ' | ' . trim($panel);
+                                            $label .= ' | <span class="text-green-600">' . trim($panel) . '</span>';
                                         }
                                     }
                                     return [$permission->id => $label];
@@ -67,6 +67,7 @@ class RoleResource extends Resource
                                 });
                             })
                             ->columns(3)
+                            ->allowHtml()
                             ->afterStateHydrated(function ($component, $state, $record) {
                                 // If admin (id=1), preselect all permissions
                                 if ($record && $record->id == 1) {
