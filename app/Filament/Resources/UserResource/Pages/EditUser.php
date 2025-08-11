@@ -34,6 +34,13 @@ class EditUser extends EditRecord
                     $record->save();
                 })
                 ->successNotificationTitle('Password changed successfully!'),
+            Actions\Action::make('sendResetPasswordEmail')
+                ->label('Send Reset Password Email')
+                ->requiresConfirmation()
+                ->action(function ($record) {
+                    \Illuminate\Support\Facades\Password::sendResetLink(['email' => $record->email]);
+                })
+                ->successNotificationTitle('Password reset email sent!'),
         ];
     }
 }
