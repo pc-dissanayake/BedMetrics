@@ -36,7 +36,6 @@ class RoleResource extends Resource
                             $component->state(\App\Models\Permission::pluck('id')->toArray());
                         }
                     })
-                    ->helperText('Select permissions for this role. For admin, use the Add All button.'),
                 Forms\Components\Actions::make([
                     Forms\Components\Actions\Action::make('addAllPermissions')
                         ->label('Add All')
