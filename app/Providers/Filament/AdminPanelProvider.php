@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
                 \Devonab\FilamentEasyFooter\EasyFooterPlugin::make()
                     ->withLoadTime()
                     ->withBorder(),
+                \Swis\Filament\Backgrounds\FilamentBackgroundsPlugin::make()
+                 ->showAttribution(false),
             ])
             ->default()
             ->id('admin')
