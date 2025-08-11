@@ -44,12 +44,16 @@ class ListPermissions extends ListRecords
                 ])
                 ->action(function (array $data) {
                     $group = \Illuminate\Support\Str::slug($data['group_name'], '_');
+                    $adminRole = \App\Models\Role::where('name', 'admin')->first();
                     foreach ($data['actions'] as $action) {
                         $permission = $action . '.' . $group;
-                        \App\Models\Permission::firstOrCreate([
+                        $perm = \App\Models\Permission::firstOrCreate([
                             'name' => $permission,
                             'guard_name' => 'web',
                         ]);
+                        if ($adminRole && !$adminRole->hasPermissionTo($perm)) {
+                            $adminRole->givePermissionTo($perm);
+                        }
                     }
                 }),
         ];
