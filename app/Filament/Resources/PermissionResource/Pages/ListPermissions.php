@@ -63,7 +63,7 @@ class ListPermissions extends ListRecords
                             'name' => $permission,
                             'guard_name' => 'web',
                         ], [
-                            'description' => $data['description'] ?? null,
+                            'description' => ucwords($action)." : ".$data['description'] ?? null,
                         ]);
                         if ($adminRole && !$adminRole->hasPermissionTo($perm)) {
                             $adminRole->givePermissionTo($perm);
