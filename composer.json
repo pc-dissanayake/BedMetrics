@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.10.1",
         "owenvoke/blade-fontawesome": "^2.9",
         "pxlrbt/filament-environment-indicator": "^2.2",
-        "spatie/laravel-permission": "^6.21"
+        "spatie/laravel-permission": "^6.21",
+        "swisnl/filament-backgrounds": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
