@@ -38,14 +38,36 @@ class RoleResource extends Resource
                         ])->columnSpanFull(),
                         Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
                             ->label('Permissions')
-                            ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
+                            ->options(function () {
+                                return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                    // Parse permission name: action.model_panel
+                                    $parts = explode('.', $permission->name);
+                                    $action = isset($parts[0]) ? ucfirst($parts[0]) : $permission->name;
+                                    $rest = isset($parts[1]) ? $parts[1] : '';
+                                    $modelPanel = explode('-', $rest);
+                                    $model = isset($modelPanel[0]) ? str_replace('_', ' ', ucfirst($modelPanel[0])) : '';
+                                    $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
+                                    $label = $action;
+                                    if ($model || $panel) {
+                                        $label .= ' : ' . trim($model);
+                                        if ($panel) {
+                                            $label .= ' | ' . trim($panel);
+                                        }
+                                    }
+                                    if (!empty($permission->description)) {
+                                        $label .= "\n<small>" . e($permission->description) . "</small>";
+                                    }
+                                    return [$permission->id => $label];
+                                });
+                            })
                             ->columns(3)
                             ->afterStateHydrated(function ($component, $state, $record) {
                                 // If admin (id=1), preselect all permissions
                                 if ($record && $record->id == 1) {
                                     $component->state(\App\Models\Permission::pluck('id')->toArray());
                                 }
-                            }),
+                            })
+                            ->disableLabelHtml(),
                     ]),
             ]);
     }
