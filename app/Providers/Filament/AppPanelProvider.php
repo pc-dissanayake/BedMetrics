@@ -25,6 +25,9 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->plugins([
                 \pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::make(),
+                \Devonab\FilamentEasyFooter\EasyFooterPlugin::make()
+                    ->withLoadTime()
+                    ->withBorder(),
             ])
             ->id('app')
             ->path('app')

@@ -25,6 +25,9 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->plugins([
                 \pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::make(),
+                \Devonab\FilamentEasyFooter\EasyFooterPlugin::make()
+                    ->withLoadTime()
+                    ->withBorder(),
             ])
             ->default()
             ->id('admin')
