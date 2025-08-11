@@ -66,8 +66,7 @@ class RoleResource extends Resource
                                 if ($record && $record->id == 1) {
                                     $component->state(\App\Models\Permission::pluck('id')->toArray());
                                 }
-                            })
-                            ->disableLabelHtml(),
+                            }),
                     ]),
             ]);
     }
