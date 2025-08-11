@@ -41,11 +41,11 @@ class UserResource extends Resource
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->preload(),
-                Forms\Components\Select::make('permissions')
-                    ->label('Permissions')
-                    ->multiple()
-                    ->relationship('permissions', 'name')
-                    ->preload(),
+                // Forms\Components\Select::make('permissions')
+                //     ->label('Permissions')
+                //     ->multiple()
+                //     ->relationship('permissions', 'name')
+                //     ->preload(),
             ]);
     }
 
