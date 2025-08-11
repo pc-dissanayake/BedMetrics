@@ -37,8 +37,6 @@ class ListPermissions extends ListRecords
                             'reject' => 'Reject',
                             'archive' => 'Archive',
                             'restore' => 'Restore',
-                            'publish' => 'Publish',
-                            'unpublish' => 'Unpublish',
                         ])
                         ])
                         ->columns(5)
