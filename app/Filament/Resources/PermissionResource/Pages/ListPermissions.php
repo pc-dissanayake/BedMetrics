@@ -18,15 +18,23 @@ class ListPermissions extends ListRecords
                 ->label('Add Bulk Permissions')
                 ->modalHeading('Bulk Permission Generator')
                 ->form([
-                    \Filament\Forms\Components\TextInput::make('group_name')
-                        ->label('Permission Group Name')
+                    \Filament\Forms\Components\TextInput::make('permission_model')
+                        ->label('Permission Model')
                         ->required()
-                        ->helperText('Separate Panel from "-". eg: User-Admin_Panel'),
+                        ->helperText('E.g. User, Product, etc.'),
+                    \Filament\Forms\Components\Select::make('panel')
+                        ->label('Panel')
+                        ->options([
+                            'admin_panel' => 'Admin Panel',
+                            'app_panel' => 'App Panel',
+                        ])
+                        ->default('admin_panel')
+                        ->required(),
                     \Filament\Forms\Components\CheckboxList::make('actions')
                         ->label('Available Permissions')
                         ->options([
-                            'view' => 'View', //view self
-                            'list' => 'List', //view all
+                            'view' => 'View',
+                            'list' => 'List',
                             'create' => 'Create',
                             'edit' => 'Edit',
                             'delete' => 'Delete',
@@ -41,15 +49,21 @@ class ListPermissions extends ListRecords
                         ->columns(5)
                         ->default(['view', 'list', 'create', 'edit', 'delete'])
                         ->required(),
+                    \Filament\Forms\Components\TextInput::make('description')
+                        ->label('Description (optional)')
+                        ->nullable(),
                 ])
                 ->action(function (array $data) {
-                    $group = \Illuminate\Support\Str::slug($data['group_name'], '_');
+                    $model = str_replace(' ', '_', strtolower($data['permission_model']));
+                    $panel = str_replace(' ', '_', strtolower($data['panel']));
                     $adminRole = \App\Models\Role::where('name', 'admin')->first();
                     foreach ($data['actions'] as $action) {
-                        $permission = $action . '.' . $group;
+                        $permission = $action . '.' . $model . '-' . $panel;
                         $perm = \App\Models\Permission::firstOrCreate([
                             'name' => $permission,
                             'guard_name' => 'web',
+                        ], [
+                            'description' => $data['description'] ?? null,
                         ]);
                         if ($adminRole && !$adminRole->hasPermissionTo($perm)) {
                             $adminRole->givePermissionTo($perm);
