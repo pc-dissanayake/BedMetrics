@@ -1,4 +1,6 @@
+<?php
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 
 // Password reset request route
@@ -40,9 +42,8 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-<?php
 
-use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
