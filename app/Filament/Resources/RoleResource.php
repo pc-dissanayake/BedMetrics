@@ -39,6 +39,40 @@ class RoleResource extends Resource
                         //             $set('permissions', \App\Models\Permission::pluck('id')->toArray());
                         //         }),
                         // ])->columnSpanFull(),
+                        Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->label('Permissions')
+                            ->options(function () {
+                                return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                    $parts = explode('.', $permission->name);
+                                    $action = isset($parts[0]) ? ucfirst($parts[0]) : $permission->name;
+                                    $rest = isset($parts[1]) ? $parts[1] : '';
+                                    $modelPanel = explode('-', $rest);
+                                    $model = isset($modelPanel[0]) ? str_replace('_', ' ', ucfirst($modelPanel[0])) : '';
+                                    $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
+                                    $label = $action;
+                                    if ($model || $panel) {
+                                        $label .= ' : ' . trim($model);
+                                        if ($panel) {
+                                            $label .= ' | ' . trim($panel);
+                                        }
+                                    }
+                                    return [$permission->id => $label];
+                                });
+                            })
+                            ->descriptions(function () {
+                                return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                    return [$permission->id => $permission->description];
+                                });
+                            })
+                            ->columns(3)
+                            ->afterStateHydrated(function ($component, $state, $record) {
+                                // If admin (id=1), preselect all permissions
+                                if ($record && $record->id == 1) {
+                                    $component->state(\App\Models\Permission::pluck('id')->toArray());
+                                }
+                            }),
                     ]),
             ]);
     }
@@ -52,45 +86,12 @@ class RoleResource extends Resource
                     ->counts('permissions')
                     ->label('Permissions'),
             ])
-                                                        ->allowHtml()
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-                                                    Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
-                                                        ->label('Permissions')
-                                                        ->options(function () {
-                                                            return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
-                                                                $parts = explode('.', $permission->name);
-                                                                $action = isset($parts[0]) ? ucfirst($parts[0]) : $permission->name;
-                                                                $rest = isset($parts[1]) ? $parts[1] : '';
-                                                                $modelPanel = explode('-', $rest);
-                                                                $model = isset($modelPanel[0]) ? str_replace('_', ' ', ucfirst($modelPanel[0])) : '';
-                                                                $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
-                                                                $label = '<span>' . $action . '</span>';
-                                                                if ($model || $panel) {
-                                                                    $label .= ' : <span class="text-blue-600">' . trim($model) . '</span>';
-                                                                    if ($panel) {
-                                                                        $label .= ' | <span class="text-green-600">' . trim($panel) . '</span>';
-                                                                    }
-                                                                }
-                                                                return [$permission->id => $label];
-                                                            });
-                                                        })
-                                                        ->descriptions(function () {
-                                                            return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
-                                                                return [$permission->id => $permission->description];
-                                                            });
-                                                        })
-                                                        ->columns(3)
-                                                        ->afterStateHydrated(function ($component, $state, $record) {
-                                                            // If admin (id=1), preselect all permissions
-                                                            if ($record && $record->id == 1) {
-                                                                $component->state(\App\Models\Permission::pluck('id')->toArray());
-                                                            }
-                                                        }),
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
