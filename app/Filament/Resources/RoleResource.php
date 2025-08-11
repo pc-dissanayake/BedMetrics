@@ -19,7 +19,8 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-user-tag';
 
-    
+    protected static ?string $navigationGroup = "User Settings";
+
 
     public static function form(Form $form): Form
     {
