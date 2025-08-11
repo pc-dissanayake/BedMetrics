@@ -16,7 +16,7 @@
         "owenvoke/blade-fontawesome": "^2.9",
         "pxlrbt/filament-environment-indicator": "^2.2",
         "spatie/laravel-permission": "^6.21",
-        "swisnl/filament-backgrounds": "*"
+        "swisnl/filament-backgrounds": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
