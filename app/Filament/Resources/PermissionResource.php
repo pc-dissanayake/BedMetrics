@@ -23,11 +23,11 @@ class PermissionResource extends Resource
         public static function getPermissions(): array
     {
         return [
-            'view' => 'view.user-admin_panel',
-            'viewAny' => 'list.user-admin_panel',
-            'create' => 'create.user-admin_panel',
-            'update' => 'edit.user-admin_panel',
-            'delete' => 'delete.user-admin_panel',
+            'view' => 'view.permission-admin_panel',
+            'viewAny' => 'list.permission-admin_panel',
+            'create' => 'create.permission-admin_panel',
+            'update' => 'edit.permission-admin_panel',
+            'delete' => 'delete.permission-admin_panel',
         ];
     }
 
