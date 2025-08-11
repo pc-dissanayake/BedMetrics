@@ -26,6 +26,16 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+            ])
+            ->headerActions([
+                Forms\Components\Actions\Action::make('addAllPermissions')
+                    ->label('Add All')
+                    ->visible(fn ($get) => $get('id') == 1)
+                    ->action(function ($set) {
+                        $set('permissions', \App\Models\Permission::pluck('id')->toArray());
+                    }),
+            ])
+            ->schema([
                 Forms\Components\CheckboxList::make('permissions')
                     ->label('Permissions')
                     ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
@@ -35,15 +45,8 @@ class RoleResource extends Resource
                         if ($record && $record->id == 1) {
                             $component->state(\App\Models\Permission::pluck('id')->toArray());
                         }
-                    })
-                Forms\Components\Actions::make([
-                    Forms\Components\Actions\Action::make('addAllPermissions')
-                        ->label('Add All')
-                        ->visible(fn ($get) => $get('id') == 1)
-                        ->action(function ($set) {
-                            $set('permissions', \App\Models\Permission::pluck('id')->toArray());
-                        }),
-                ]),
+                    }),
+            ])
             ]);
     }
 
