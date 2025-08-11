@@ -20,7 +20,7 @@ class ListPermissions extends ListRecords
                 ->form([
                     \Filament\Forms\Components\TextInput::make('permission_model')
                         ->label('Permission Model')
-                        ->required()
+                        ->required()-
                         ->helperText('E.g. User, Product, etc.'),
                     \Filament\Forms\Components\Select::make('panel')
                         ->label('Panel')
