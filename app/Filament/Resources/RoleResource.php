@@ -53,7 +53,7 @@ class RoleResource extends Resource
                                                                 $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
                                                                 $label = '<span>' . $action . '</span>';
                                                                 if ($model || $panel) {
-                                                                    $label .= ' : <span class="text-blue-600">' . trim($model) . '</span>';
+                                                                    $label .= ' : <span class="text-blue-600" style="color: #2563eb;">' . trim($model) . '</span>';
                                                                     if ($panel) {
                                                                         $label .= ' | <span class="text-green-600">' . trim($panel) . '</span>';
                                                                     }
