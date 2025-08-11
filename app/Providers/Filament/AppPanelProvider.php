@@ -28,7 +28,7 @@ class AppPanelProvider extends PanelProvider
                 \Devonab\FilamentEasyFooter\EasyFooterPlugin::make()
                     ->withLoadTime()
                     ->withBorder(),
-                        \DiogoGPinto\AuthUIEnhancer\AuthUIEnhancerPlugin::make(),
+                       AuthUIEnhancerPlugin::make(),
 
             ])
             ->id('app')
