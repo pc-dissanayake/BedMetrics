@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
                     ->withLoadTime()
                     ->withBorder(),
                 \Swis\Filament\Backgrounds\FilamentBackgroundsPlugin::make()
-                 ->showAttribution(false)->remember(10),
+                 ->showAttribution(false)->remember(1),
             ])
             ->default()
             ->id('admin')
