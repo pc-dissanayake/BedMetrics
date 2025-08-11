@@ -15,6 +15,7 @@ class ListPermissions extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('bulkPermission')
+            ->columns(5)
                 ->label('Bulk Permission')
                 ->modalHeading('Bulk Permission Generator')
                 ->form([
