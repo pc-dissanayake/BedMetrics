@@ -25,11 +25,12 @@ class ListPermissions extends ListRecords
                     \Filament\Forms\Components\CheckboxList::make('actions')
                         ->label('Available Permissions')
                         ->options([
-                            'view' => 'View',
-                            'list' => 'List',
+                            'view' => 'View', //view self
+                            'list' => 'List', //view all
                             'create' => 'Create',
                             'edit' => 'Edit',
                             'delete' => 'Delete',
+                            'bulkdelete' => 'Bulk Delete',
                             'export' => 'Export',
                             'import' => 'Import',
                             'approve' => 'Approve',
