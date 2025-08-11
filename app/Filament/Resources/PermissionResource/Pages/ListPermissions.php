@@ -15,7 +15,6 @@ class ListPermissions extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('bulkPermission')
-            ->columns(5)
                 ->label('Bulk Permission')
                 ->modalHeading('Bulk Permission Generator')
                 ->form([
@@ -32,7 +31,7 @@ class ListPermissions extends ListRecords
                             'delete' => 'Delete',
                             'export' => 'Export',
                             'import' => 'Import',
-                        ])
+                        ])->columns(5)
                         ->required(),
                 ])
                 ->action(function (array $data) {
