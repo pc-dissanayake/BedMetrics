@@ -27,19 +27,19 @@ class PermissionResource extends Resource
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-
-            Forms\Components\TextInput::make('description')
-                ->label('Description')
-                ->maxLength(255),
-
-            Forms\Components\Select::make('guard_name')
+                Forms\Components\Select::make('guard_name')
                 ->label('Guard Name')
                 ->required()
                 ->options([
                 'web' => 'Web',
                 'api' => 'API',
-                ]),
-            ]);
+                ])
+                ->default('web'), 
+                
+                Forms\Components\TextInput::make('description')
+                ->label('Description')->columnSpanFull()
+                ->maxLength(255),
+            ])->columns(2);
         }
 
     public static function table(Table $table): Table
