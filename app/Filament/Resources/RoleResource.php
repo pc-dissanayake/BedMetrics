@@ -78,6 +78,41 @@ class RoleResource extends Resource
     }
 
     public static function table(Table $table): Table
+                                            Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
+                                                ->searchable()
+                                                ->bulkToggleable()
+                                                ->label('Permissions')
+                                                ->options(function () {
+                                                    return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                                        $parts = explode('.', $permission->name);
+                                                        $action = isset($parts[0]) ? ucfirst($parts[0]) : $permission->name;
+                                                        $rest = isset($parts[1]) ? $parts[1] : '';
+                                                        $modelPanel = explode('-', $rest);
+                                                        $model = isset($modelPanel[0]) ? str_replace('_', ' ', ucfirst($modelPanel[0])) : '';
+                                                        $panel = isset($modelPanel[1]) ? str_replace('_', ' ', ucfirst($modelPanel[1])) : '';
+                                                        $label = '<span>' . $action . '</span>';
+                                                        if ($model || $panel) {
+                                                            $label .= ' : <span class="text-blue-600">' . trim($model) . '</span>';
+                                                            if ($panel) {
+                                                                $label .= ' | <span class="text-green-600">' . trim($panel) . '</span>';
+                                                            }
+                                                        }
+                                                        return [$permission->id => $label];
+                                                    });
+                                                })
+                                                ->descriptions(function () {
+                                                    return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                                        return [$permission->id => $permission->description];
+                                                    });
+                                                })
+                                                ->columns(3)
+                                                ->allowHtml()
+                                                ->afterStateHydrated(function ($component, $state, $record) {
+                                                    // If admin (id=1), preselect all permissions
+                                                    if ($record && $record->id == 1) {
+                                                        $component->state(\App\Models\Permission::pluck('id')->toArray());
+                                                    }
+                                                }),
     {
         return $table
             ->columns([
