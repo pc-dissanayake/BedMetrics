@@ -41,8 +41,7 @@ class RoleResource extends Resource
                         // ])->columnSpanFull(),
                         Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
                             ->searchable()
-
-
+                            ->bulkToggleable()
                             ->label('Permissions')
                             ->options(function () {
                                 return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
