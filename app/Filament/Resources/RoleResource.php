@@ -24,29 +24,29 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()->columnSpanFull()
+                    ->required()
                     ->maxLength(255),
-            ])
-            ->headerActions([
-                Forms\Components\Actions\Action::make('addAllPermissions')
-                    ->label('Add All')
-                    ->visible(fn ($get) => $get('id') == 1)
-                    ->action(function ($set) {
-                        $set('permissions', \App\Models\Permission::pluck('id')->toArray());
-                    }),
-            ])
-            ->schema([
-                Forms\Components\CheckboxList::make('permissions')
-                    ->label('Permissions')
-                    ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
-                    ->columns(3)
-                    ->afterStateHydrated(function ($component, $state, $record) {
-                        // If admin (id=1), preselect all permissions
-                        if ($record && $record->id == 1) {
-                            $component->state(\App\Models\Permission::pluck('id')->toArray());
-                        }
-                    }),
-            ])
+                Forms\Components\Fieldset::make('Permissions')
+                    ->schema([
+                        Forms\Components\Actions::make([
+                            Forms\Components\Actions\Action::make('addAllPermissions')
+                                ->label('Add All')
+                                ->visible(fn ($livewire) => $livewire->record?->id == 1)
+                                ->action(function ($set) {
+                                    $set('permissions', \App\Models\Permission::pluck('id')->toArray());
+                                }),
+                        ]),
+                        Forms\Components\CheckboxList::make('permissions')
+                            ->label('Permissions')
+                            ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
+                            ->columns(3)
+                            ->afterStateHydrated(function ($component, $state, $record) {
+                                // If admin (id=1), preselect all permissions
+                                if ($record && $record->id == 1) {
+                                    $component->state(\App\Models\Permission::pluck('id')->toArray());
+                                }
+                            }),
+                    ]),
             ]);
     }
 
