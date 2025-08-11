@@ -55,7 +55,7 @@ class RoleResource extends Resource
                                                                 if ($model || $panel) {
                                                                     $label .= ' : <span class="text-blue-600" style="color: #2563eb;">' . trim($model) . '</span>';
                                                                     if ($panel) {
-                                                                        $label .= ' | <span class="text-green-600">' . trim($panel) . '</span>';
+                                                                        $label .= ' | <span class="text-green-600" style="color: #16a34a;">' . trim($panel) . '</span>';
                                                                     }
                                                                 }
                                                                 return [$permission->id => $label];
