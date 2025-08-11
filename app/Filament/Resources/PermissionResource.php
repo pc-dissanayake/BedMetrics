@@ -20,6 +20,17 @@ class PermissionResource extends Resource
     protected static ?string $navigationIcon = 'fas-user-gear';
     protected static ?string $navigationGroup = "User Settings";
 
+        public static function getPermissions(): array
+    {
+        return [
+            'view' => 'view.user-admin_panel',
+            'viewAny' => 'list.user-admin_panel',
+            'create' => 'create.user-admin_panel',
+            'update' => 'edit.user-admin_panel',
+            'delete' => 'delete.user-admin_panel',
+        ];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
