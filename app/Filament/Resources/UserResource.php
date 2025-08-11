@@ -42,11 +42,19 @@ class UserResource extends Resource
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->preload(),
-                // Forms\Components\Select::make('permissions')
-                //     ->label('Permissions')
-                //     ->multiple()
-                //     ->relationship('permissions', 'name')
-                //     ->preload(),
+                Forms\Components\Select::make('permissions')
+                    ->label('Permissions')
+                    ->multiple()
+                    ->options(function () {
+                        return [
+                            'view.user-admin_panel' => 'View : User | Admin Panel',
+                            'list.user-admin_panel' => 'List : User | Admin Panel',
+                            'create.user-admin_panel' => 'Create : User | Admin Panel',
+                            'edit.user-admin_panel' => 'Edit : User | Admin Panel',
+                            'delete.user-admin_panel' => 'Delete : User | Admin Panel',
+                        ];
+                    })
+                    ->preload(),
             ]);
     }
 
