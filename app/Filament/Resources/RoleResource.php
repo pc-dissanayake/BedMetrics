@@ -40,7 +40,6 @@ class RoleResource extends Resource
                             ->label('Permissions')
                             ->options(function () {
                                 return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
-                                    // Parse permission name: action.model_panel
                                     $parts = explode('.', $permission->name);
                                     $action = isset($parts[0]) ? ucfirst($parts[0]) : $permission->name;
                                     $rest = isset($parts[1]) ? $parts[1] : '';
@@ -54,10 +53,12 @@ class RoleResource extends Resource
                                             $label .= ' | ' . trim($panel);
                                         }
                                     }
-                                    if (!empty($permission->description)) {
-                                        $label .= "\n    " . $permission->description;
-                                    }
                                     return [$permission->id => $label];
+                                });
+                            })
+                            ->descriptions(function () {
+                                return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
+                                    return [$permission->id => $permission->description];
                                 });
                             })
                             ->columns(3)
