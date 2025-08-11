@@ -35,7 +35,7 @@ class RoleResource extends Resource
                                 ->action(function ($set) {
                                     $set('permissions', \App\Models\Permission::pluck('id')->toArray());
                                 }),
-                        ]),
+                        ])->columnSpanFull(),
                         Forms\Components\CheckboxList::make('permissions')
                             ->label('Permissions')
                             ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
