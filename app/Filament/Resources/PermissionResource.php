@@ -32,10 +32,13 @@ class PermissionResource extends Resource
                 ->label('Description')
                 ->maxLength(255),
 
-            Forms\Components\TextInput::make('guard_name')
+            Forms\Components\Select::make('guard_name')
                 ->label('Guard Name')
                 ->required()
-                ->maxLength(255),
+                ->options([
+                'web' => 'Web',
+                'api' => 'API',
+                ]),
             ]);
         }
 
