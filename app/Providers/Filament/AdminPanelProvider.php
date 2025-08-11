@@ -23,6 +23,9 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->plugins([
+                \pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::make(),
+            ])
             ->default()
             ->id('admin')
             ->path('admin')

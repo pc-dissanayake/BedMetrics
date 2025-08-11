@@ -23,6 +23,9 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->plugins([
+                \pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::make(),
+            ])
             ->id('app')
             ->path('app')
             ->registration()
