@@ -67,6 +67,7 @@ class RoleResource extends Resource
                                                             });
                                                         })
                                                         ->columns(3)
+                                                            ->allowHtml()
                             ->afterStateHydrated(function ($component, $state, $record) {
                                 // If admin (id=1), preselect all permissions
                                 if ($record && $record->id == 1) {
