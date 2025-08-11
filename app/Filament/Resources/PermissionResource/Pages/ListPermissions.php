@@ -20,8 +20,7 @@ class ListPermissions extends ListRecords
                 ->form([
                     \Filament\Forms\Components\TextInput::make('group_name')
                         ->label('Permission Group Name')
-                        ->required()
-                        ->description('Seperate Panel from "-". eg: User-Admin_Panel'),
+                        ->required(),
                     \Filament\Forms\Components\CheckboxList::make('actions')
                         ->label('Available Permissions')
                         ->options([
