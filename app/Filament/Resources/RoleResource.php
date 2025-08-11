@@ -31,15 +31,18 @@ class RoleResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Fieldset::make('Permissions')
                     ->schema([
-                        Forms\Components\Actions::make([
-                            Forms\Components\Actions\Action::make('addAllPermissions')
-                                ->label('Add All')
-                                ->visible(fn ($livewire) => $livewire->record?->id == 1)
-                                ->action(function ($set) {
-                                    $set('permissions', \App\Models\Permission::pluck('id')->toArray());
-                                }),
-                        ])->columnSpanFull(),
+                        // Forms\Components\Actions::make([
+                        //     Forms\Components\Actions\Action::make('addAllPermissions')
+                        //         ->label('Add All')
+                        //         ->visible(fn ($livewire) => $livewire->record?->id == 1)
+                        //         ->action(function ($set) {
+                        //             $set('permissions', \App\Models\Permission::pluck('id')->toArray());
+                        //         }),
+                        // ])->columnSpanFull(),
                         Forms\Components\CheckboxList::make('permissions')->columnSpanFull()
+                            ->searchable()
+
+
                             ->label('Permissions')
                             ->options(function () {
                                 return \App\Models\Permission::all()->mapWithKeys(function ($permission) {
