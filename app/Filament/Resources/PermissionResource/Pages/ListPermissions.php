@@ -38,7 +38,6 @@ class ListPermissions extends ListRecords
                             'archive' => 'Archive',
                             'restore' => 'Restore',
                         ])
-                        ])
                         ->columns(5)
                         ->default(['view', 'list', 'create', 'edit', 'delete'])
                         ->required(),
