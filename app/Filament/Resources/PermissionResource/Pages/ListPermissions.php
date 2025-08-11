@@ -32,6 +32,13 @@ class ListPermissions extends ListRecords
                             'delete' => 'Delete',
                             'export' => 'Export',
                             'import' => 'Import',
+                            'approve' => 'Approve',
+                            'reject' => 'Reject',
+                            'archive' => 'Archive',
+                            'restore' => 'Restore',
+                            'publish' => 'Publish',
+                            'unpublish' => 'Unpublish',
+                        ])
                         ])
                         ->columns(5)
                         ->default(['view', 'list', 'create', 'edit', 'delete'])
