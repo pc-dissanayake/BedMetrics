@@ -29,7 +29,7 @@ class AppPanelProvider extends PanelProvider
                     ->withLoadTime()
                     ->withBorder(),
                 \Swis\Filament\Backgrounds\FilamentBackgroundsPlugin::make()
-                 ->showAttribution(false),
+                 ->showAttribution(false)->remember(10),
             ])
             ->id('app')
             ->path('app')
