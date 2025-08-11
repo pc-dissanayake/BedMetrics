@@ -26,11 +26,25 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('permissions')
+                Forms\Components\CheckboxList::make('permissions')
                     ->label('Permissions')
-                    ->multiple()
-                    ->relationship('permissions', 'name')
-                    ->preload(),
+                    ->options(fn () => \App\Models\Permission::pluck('name', 'id'))
+                    ->columns(3)
+                    ->afterStateHydrated(function ($component, $state, $record) {
+                        // If admin (id=1), preselect all permissions
+                        if ($record && $record->id == 1) {
+                            $component->state(\App\Models\Permission::pluck('id')->toArray());
+                        }
+                    })
+                    ->helperText('Select permissions for this role. For admin, use the Add All button.'),
+                Forms\Components\Actions::make([
+                    Forms\Components\Actions\Action::make('addAllPermissions')
+                        ->label('Add All')
+                        ->visible(fn ($get) => $get('id') == 1)
+                        ->action(function ($set) {
+                            $set('permissions', \App\Models\Permission::pluck('id')->toArray());
+                        }),
+                ]),
             ]);
     }
 
