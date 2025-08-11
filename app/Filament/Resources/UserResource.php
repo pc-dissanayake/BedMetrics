@@ -67,8 +67,9 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),            Tables\Columns\TextColumn::make('email')
-
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                ,
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()
