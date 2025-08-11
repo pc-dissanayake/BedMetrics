@@ -24,7 +24,7 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
+                    ->required()->columnSpanFull()
                     ->maxLength(255),
             ])
             ->headerActions([
