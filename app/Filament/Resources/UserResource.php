@@ -16,21 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    public static function getPermissions(): array
-    {
-        return [
-            'view' => 'view.user-admin_panel',
-            'viewAny' => 'list.user-admin_panel',
-            'create' => 'create.user-admin_panel',
-            'update' => 'edit.user-admin_panel',
-            'delete' => 'delete.user-admin_panel',
-        ];
-    }
-{
-    protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     public static function getPermissions(): array
     {
         return [
