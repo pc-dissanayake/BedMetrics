@@ -55,7 +55,7 @@ class RoleResource extends Resource
                                         }
                                     }
                                     if (!empty($permission->description)) {
-                                        $label .= "\n<small>" . e($permission->description) . "</small>";
+                                        $label .= "\n    " . $permission->description;
                                     }
                                     return [$permission->id => $label];
                                 });
