@@ -20,7 +20,8 @@ class ListPermissions extends ListRecords
                 ->form([
                     \Filament\Forms\Components\TextInput::make('group_name')
                         ->label('Permission Group Name')
-                        ->required(),
+                        ->required()
+                        ->describtion(),
                     \Filament\Forms\Components\CheckboxList::make('actions')
                         ->label('Available Permissions')
                         ->options([
