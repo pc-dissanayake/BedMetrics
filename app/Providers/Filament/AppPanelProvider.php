@@ -28,6 +28,8 @@ class AppPanelProvider extends PanelProvider
                 \Devonab\FilamentEasyFooter\EasyFooterPlugin::make()
                     ->withLoadTime()
                     ->withBorder(),
+                        AuthUIEnhancerPlugin::make(),
+
             ])
             ->id('app')
             ->path('app')
