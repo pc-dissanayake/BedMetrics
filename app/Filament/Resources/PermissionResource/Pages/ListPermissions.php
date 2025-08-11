@@ -21,7 +21,7 @@ class ListPermissions extends ListRecords
                     \Filament\Forms\Components\TextInput::make('group_name')
                         ->label('Permission Group Name')
                         ->required()
-                        ->describtion(),
+                        ->description('Seperate User-Admin_Panel'),
                     \Filament\Forms\Components\CheckboxList::make('actions')
                         ->label('Available Permissions')
                         ->options([
