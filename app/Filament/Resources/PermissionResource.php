@@ -24,11 +24,20 @@ class PermissionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+            Forms\Components\TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+
+            Forms\Components\TextInput::make('description')
+                ->label('Description')
+                ->maxLength(255),
+
+            Forms\Components\TextInput::make('guard_name')
+                ->label('Guard Name')
+                ->required()
+                ->maxLength(255),
             ]);
-    }
+        }
 
     public static function table(Table $table): Table
     {
